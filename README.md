@@ -20,7 +20,7 @@
 - 각종 백엔드 구현 및 UI 1차 구현 완료 (05.16.)
 
 ## 💻 개발 환경
-- OracleDB에 새로운 계정 생성이 Block 되는 이슈가 발생했기에, 우선 Local 환경에서 MySQL을 통해 서비스를 구현한 뒤, migration을 통해 OracleDB or AWS에 탑재 추진
+- OracleDB에 새로운 계정 생성 Block issue 발생, 우선 Local 환경에서 MySQL을 통해 서비스를 구현한 뒤, migration을 통해 OracleDB or AWS에 탑재 추진
 
 ## 📝 차후 과제
 - ERD, WBS 시각화
