@@ -12,7 +12,7 @@
 
 ## 🛠️ 기술 스택
 - Language : Python  
-- RDBMS : Local(MySQL) or OracleDB  
+- RDBMS : Local(MySQL) → OracleDB/AWS (If Deployment happens...)
 - UI : Flask  
 
 ## 📆 개발 기간 및 진행상황
