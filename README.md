@@ -18,15 +18,16 @@
 
 ## 📆 개발 기간 및 진행상황
 - 25.05.13 ~ 28.
-- 각종 백엔드 구현 및 UI 1차 구현 완료 (05.16.)
+- 각종 백엔드 구현 및 UI 1차 구현 완료 (25.05.16.)
 - Paging 기능 구현 완료. home.html 구현 및 각종 UI 수정
-- Paging 기능에 수반되는 router app.py에 추가 완료(05.20.)
+- Paging 기능에 수반되는 router app.py에 추가 완료(25.05.20.)
+- 기능 구현 및 PPT 작성 완료 (25.05.26.)
 
 ## 💻 개발 환경
 - OracleDB에 새로운 계정 생성 Block issue 발생, 우선 Local 환경에서 MySQL을 통해 서비스를 구현한 뒤, migration을 통해 OracleDB or AWS에 탑재 추진
 
 ## 📝 차후 과제
-- ERD, WBS 시각화
+- ERD, WBS 시각화 -> ERD 완료
 - 유저 차원에서 발생할만한 불편함 조사 (현재는 Paging 기능 부재가 확인됨.) -> 완료
 - 기능 수요 조사 및 적용
 
