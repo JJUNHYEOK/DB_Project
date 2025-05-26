@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>주의사항 확인 결과 - 복약했수다</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5dc;
+            color: #3e2723;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+             font-family: 'Gowun Batang', serif;
+             color: #a1887f;
+             border-bottom: 2px solid #d7ccc8;
+             padding-bottom: 10px;
+             margin-top: 20px;
+             margin-bottom: 15px;
+        }
+         .page-title { /* 페이지 제목 스타일 */
+             margin-bottom: 30px;
+         }
+        .drug-interactions { /* 각 약품 정보 섹션 */
+             margin-bottom: 30px;
+             padding: 20px;
+             background-color: #fff9c4;
+             border: 1px solid #d7ccc8;
+             border-radius: 8px;
+             box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* 미세한 그림자 */
+        }
+        .drug-interactions h3 { /* 약품 이름 제목 */
+            color: #5d4037;
+            margin-top: 0;
+            border-bottom: 1px dashed #d7ccc8;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-family: 'Gowun Batang', serif;
+        }
+        .interaction-section { /* 각 항목 (경고, 주의사항, 상호작용) 섹션 */
+            margin-left: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #ffffff;
+            border: 1px solid #d7ccc8;
+            border-radius: 5px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.08); /* 미세한 그림자 */
+        }
+         .interaction-section h4 { /* 항목 제목 (경고, 주의사항 등) */
+             color: #3e2723;
+             margin-top: 0;
+             margin-bottom: 10px;
+             font-family: 'Gowun Batang', serif;
+         }
+         .interaction-section p { /* 항목 내용 */
+             margin-bottom: 0;
+             font-size: 0.95rem;
+             white-space: pre-wrap; /* 공백 및 줄바꿈 유지 */
+             word-break: break-word; /* 긴 단어 줄바꿈 */
+         }
+         a { /* 링크 스타일 */
+            color: #5d4037;
+            text-decoration: none;
+            font-weight: bold;
+             font-family: 'Nanum Gothic', sans-serif;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #3e2723;
+        }
+         /* 푸터 스타일 */
+         .footer {
+             margin-top: 40px;
+             text-align: center;
+             font-size: 0.85rem;
+             color: #8d6e63;
+         }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">선택 약품 주의사항 확인 결과</h1>
+
+    {% if selected_drugs %}
+
+        {% if selected_drugs | length < 2 %}
+             <p>상호작용 확인은 약품을 두 개 이상 선택했을 때 의미가 있습니다. 선택하신 약품의 개수: {{ selected_drugs | length }} 개</p>
+        {% endif %}
+
+        {% for drug in selected_drugs %}
+        <div class="drug-interactions">
+            <h3>{{ loop.index }}. {{ drug.product_name | default('이름 없음') }} (품목코드: {{ drug.item_code | default('코드 없음') }})</h3>
+
+            {% if drug.warning_warning %}
+            <div class="interaction-section">
+                <h4>경고 (Warning)</h4>
+                <p>{{ drug.warning_warning | default('내용 없음') }}</p>
+            </div>
+            {% endif %}
+
+            {% if drug.precautions %}
+            <div class="interaction-section">
+                <h4>주의사항 (Precautions)</h4>
+                <p>{{ drug.precautions | default('내용 없음') }}</p>
+            </div>
+            {% endif %}
+
+            {% if drug.interactions %}
+            <div class="interaction-section">
+                <h4>이 약품의 상호작용 정보 (Interactions)</h4>
+                <p>{{ drug.interactions | default('내용 없음') }}</p>
+            </div>
+            {% endif %}
+
+            {# 만약 해당 약품의 어떤 정보도 없다면 #}
+            {% if not drug.warning_warning and not drug.precautions and not drug.interactions %}
+            <div class="interaction-section">
+                <p>해당 약품에 대한 경고, 주의사항, 상호작용 정보가 데이터베이스에 없습니다.</p>
+            </div>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+
+         <p><a href="/">[검색으로 돌아가기]</a></p>
+
+    {% else %}
+         <p>주의사항 확인할 약품 정보가 없습니다.</p>
+         <p><a href="/">[검색으로 돌아가기]</a></p>
+    {% endif %}
+
+     <div class="footer">
+        <p>&copy; 2025 복약했수다. Data provided by Korea Ministry of Food and Drug Safety.</p>
+    </div>
+
+</body>
+</html>

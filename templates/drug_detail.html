@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ drug.product_name | default('약품 상세 정보') }} - 복약했수다</title>
+     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5dc;
+            color: #3e2723;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+             font-family: 'Gowun Batang', serif;
+             color: #a1887f;
+             border-bottom: 2px solid #d7ccc8;
+             padding-bottom: 5px;
+             margin-top: 20px;
+             margin-bottom: 15px;
+        }
+        .detail-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #fff9c4;
+            border: 1px solid #d7ccc8;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        .detail-section h3 {
+             margin-top: 0;
+             color: #5d4037;
+             border-bottom: 1px dashed #d7ccc8;
+             padding-bottom: 8px;
+             margin-bottom: 15px;
+        }
+        .detail-section p, .detail-section div {
+            margin-bottom: 10px;
+            font-size: 1rem;
+             font-family: 'Nanum Gothic', sans-serif;
+             white-space: pre-wrap; /* 공백 및 줄바꿈 유지 */
+             word-break: break-word; /* 긴 단어 줄바꿈 */
+        }
+        .label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #3e2723;
+             font-family: 'Gowun Batang', serif;
+        }
+        img {
+            max-width: 300px;
+            height: auto;
+            margin-top: 10px;
+            border: 1px solid #d7ccc8;
+            border-radius: 4px;
+            display: block;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+         a { /* 링크 스타일 */
+            color: #5d4037;
+            text-decoration: none;
+            font-weight: bold;
+             font-family: 'Nanum Gothic', sans-serif;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #3e2723;
+        }
+        /* 푸터 스타일 */
+         .footer {
+             margin-top: 40px;
+             text-align: center;
+             font-size: 0.85rem;
+             color: #8d6e63;
+         }
+    </style>
+</head>
+<body>
+    <h1>{{ drug.product_name | default('정보 없음') }}</h1>
+    {# <p><span class="label">품목기준코드:</span> {{ drug.item_code | default('정보 없음') }}</p> <-- 품목코드 표시 제거 #}
+    <p><span class="label">업체명:</span> {{ drug.company_name | default('정보 없음') }}</p>
+     <p><span class="label">공개일자:</span> {{ drug.public_date | default('정보 없음') }}</p>
+    <p><span class="label">수정일자:</span> {{ drug.update_date | default('정보 없음') }}</p>
+
+
+    {% if drug.efficacy %}
+    <div class="detail-section">
+        <h3>효능/효과 (Efficacy)</h3>
+        <p>{{ drug.efficacy | default('정보 없음') }}</p>
+    </div>
+    {% endif %}
+
+    {% if drug.howtouse %}
+    <div class="detail-section">
+        <h3>용법/용량 (How to Use)</h3>
+        <p>{{ drug.howtouse | default('정보 없음') }}</p>
+    </div>
+    {% endif %}
+
+    {% if drug.warning_warning %}
+    <div class="detail-section">
+        <h3>경고 (Warning)</h3>
+        <p>{{ drug.warning_warning | default('정보 없음') }}</p>
+    </div>
+    {% endif %}
+
+    {% if drug.precautions %}
+    <div class="detail-section">
+        <h3>주의사항 (Precautions)</h3>
+        <p>{{ drug.precautions | default('정보 없음') }}</p>
+    </div>
+    {% endif %}
+
+    {% if drug.interactions %}
+    <div class="detail-section">
+        <h3>상호작용 (Interactions)</h3>
+        <p>{{ drug.interactions | default('정보 없음') }}</p>
+    </div>
+    {% endif %}
+
+    {% if drug.side_effects %}
+    <div class="detail-section">
+        <h3>부작용 (Side Effects)</h3>
+        <p>{{ drug.side_effects | default('정보 없음') }}</p>
+    </div>
+    {% endif %}
+
+     {% if drug.storage %}
+    <div class="detail-section">
+        <h3>보관 방법 (Storage)</h3>
+        <p>{{ drug.storage | default('정보 없음') }}</p>
+    </div>
+    {% endif %}
+
+    {% if drug.tablet_image_info %}
+    <div class="detail-section">
+        <h3>낱알 이미지 정보</h3>
+         {% if drug.tablet_image_info.startswith('http') %}
+             <img src="{{ drug.tablet_image_info }}" alt="{{ drug.product_name | default('약품') }} 낱알 이미지">
+             <p>이미지 URL: {{ drug.tablet_image_info }}</p>
+         {% else %}
+             <p>이미지 정보 (텍스트): {{ drug.tablet_image_info | default('정보 없음') }}</p>
+         {% endif %}
+    </div>
+    {% endif %}
+
+
+     <a href="/" class="back-link">&laquo; 첫 시작 페이지로 돌아가기</a>
+
+
+     <div class="footer">
+        <p>&copy; 2025 복약했수다. Data provided by Korea Ministry of Food and Drug Safety.</p>
+    </div>
+
+</body>
+</html>
